@@ -1,7 +1,7 @@
-using Dating_App.Models.Data;
-using Dating_App.Models;
+using Dating_App.MVVM.Models;
+using Dating_App.MVVM.Models.Data;
 
-namespace Dating_App.Pages.Authentication;
+namespace Dating_App.MVVM.Views.Authentication;
 
 public partial class LoginPage : ContentPage
 {
@@ -27,6 +27,6 @@ public partial class LoginPage : ContentPage
             return;
         }
         Session.LoggedInUser = loggedInUser;
-        App.Current.MainPage = new NavigationPage(new Pages.Navigationbar());
+        App.Current.MainPage = new NavigationPage(new Navigationbar());
     }
 }

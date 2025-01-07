@@ -1,5 +1,5 @@
-﻿using Dating_App.Models.Data;
-using Dating_App.Pages.Authentication;
+﻿using Dating_App.MVVM.Models.Data;
+using Dating_App.MVVM.Views.Authentication;
 
 namespace Dating_App
 {
@@ -12,7 +12,7 @@ namespace Dating_App
             InitializeComponent();
 
             _db = db;
-            MainPage = new NavigationPage( new Pages.Authentication.StartPage(_db));
+            MainPage = new NavigationPage( new StartPage(_db));
             
         }
     }

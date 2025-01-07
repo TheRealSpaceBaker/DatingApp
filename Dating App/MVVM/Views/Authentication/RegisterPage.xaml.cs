@@ -1,8 +1,8 @@
-using Dating_App.Models.Data;
-using Dating_App.Models;
+using Dating_App.MVVM.Models;
 using System;
+using Dating_App.MVVM.Models.Data;
 
-namespace Dating_App.Pages.Authentication;
+namespace Dating_App.MVVM.Views.Authentication;
 
 public partial class RegisterPage : ContentPage
 {
@@ -39,7 +39,7 @@ public partial class RegisterPage : ContentPage
             {
                 Session.LoggedInUser = loggedInUser;
                 await DisplayAlert("Success", "Created account successfully\nWelcome!", "OK");
-                App.Current.MainPage = new NavigationPage(new Pages.Navigationbar());
+                App.Current.MainPage = new NavigationPage(new Navigationbar());
             }
             else
             {

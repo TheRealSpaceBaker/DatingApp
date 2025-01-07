@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dating_App.Models
+namespace Dating_App.MVVM.ViewModels
 {
-    public class Thing
+    public class MessageViewModel
     {
-        public int Id { get; set; }
         public string? Name { get; set; }
+        public string? Message { get; set; }
+        public string? Picture { get; set; }
     }
 }
