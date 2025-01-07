@@ -24,7 +24,7 @@ namespace Dating_App.MVVM.Models.Data
             connection.CreateTable<QuizAnswer>();
             connection.CreateTable<Message>();
             connection.CreateTable<Location>();
-            AddOrUpdateUser(new User { Email = "ravismeets@gmail.com", Name = "Ravi", Password = "ravi1809", PhoneNumber = 0639833440, Username = "SpaceBaker" });
+            AddOrUpdateUser(new User { Email = "ravismeets@gmail.com", CapitalizedEmail = "RAVISMEETS@GMAIL.COM", Name = "Ravi", Password = "ravi1809", PhoneNumber = "0639833440", Username = "SpaceBaker", CapitalizedUsername = "SPACEBAKER" });
         }
 
         public async Task<User> AddOrUpdateUser(User newUser)
@@ -79,7 +79,7 @@ namespace Dating_App.MVVM.Models.Data
         {
             try
             {
-                return connection.Table<User>().FirstOrDefault(u => u.Username == userNameOrEmail || u.Email == userNameOrEmail);
+                return connection.Table<User>().FirstOrDefault(u => u.CapitalizedUsername == userNameOrEmail.ToUpper() || u.CapitalizedEmail == userNameOrEmail.ToUpper());
             }
             catch (Exception e)
             {

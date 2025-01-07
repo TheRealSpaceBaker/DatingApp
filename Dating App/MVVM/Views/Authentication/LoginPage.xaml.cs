@@ -15,12 +15,12 @@ public partial class LoginPage : ContentPage
 
     private async void OnLoginClicked(object sender, EventArgs e)
     {
-        if (string.IsNullOrEmpty(NameEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text))
+        if (string.IsNullOrEmpty(EmailOrUsernameEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text))
         {
             DisplayAlert("Error", "Please fill in all fields", "OK");
             return;
         }
-        User loggedInUser = await _db.GetUser(NameEntry.Text);
+        User loggedInUser = await _db.GetUser(EmailOrUsernameEntry.Text);
         if (loggedInUser == null)
         {
             DisplayAlert("Error", "User not found", "OK");

@@ -15,7 +15,7 @@
             HorizontalOptions="Center" />
         <Entry
             Placeholder="Email/Username"
-            x:Name="NameEntry"
+            x:Name="EmailOrUsernameEntry"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             MinimumWidthRequest="200" />

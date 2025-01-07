@@ -16,6 +16,6 @@ namespace Dating_App.MVVM.ViewModels
         public string? Username { get; set; } = Session.LoggedInUser.Username;
         public string? Email { get; set; } = Session.LoggedInUser.Email;
         public string? Name { get; set; } = Session.LoggedInUser.Name;
-        public int PhoneNumber { get; set; } = Session.LoggedInUser.PhoneNumber;
+        public string? PhoneNumber { get; set; } = Session.LoggedInUser.PhoneNumber;
     }
 }

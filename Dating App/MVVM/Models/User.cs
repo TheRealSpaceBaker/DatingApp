@@ -15,13 +15,17 @@ namespace Dating_App.MVVM.Models
         [Required, Unique]
         public string? Username { get; set; }
         [Required, Unique]
+        public string? CapitalizedUsername { get; set; }
+        [Required, Unique]
         public string? Email { get; set; }
+        [Required, Unique]
+        public string? CapitalizedEmail { get; set; }
         [Required]
         public string? Name { get; set; }
         [Required]
         public string? Password { get; set; }
         [Required, Unique]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         [Ignore]
         public List<User>? Matches { get; set; }
         [Ignore]
