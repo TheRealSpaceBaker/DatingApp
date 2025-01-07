@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dating_App.Models
+namespace Dating_App.MVVM.Models
 {
     public class Message
     {

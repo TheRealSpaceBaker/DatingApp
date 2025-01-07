@@ -1,4 +1,4 @@
-﻿using Dating_App.Models;
+﻿using Dating_App.MVVM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-namespace Dating_App;
+namespace Dating_App.MVVM.Views;
 
 public partial class Swipe : ContentPage
 {

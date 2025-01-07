@@ -1,8 +1,8 @@
-using Dating_App.Pages.Authentication;
-using Dating_App.Models;
-using Dating_App.Models.Data;
+using Dating_App.MVVM.Views.Authentication;
+using Dating_App.MVVM.Models;
+using Dating_App.MVVM.Models.Data;
 
-namespace Dating_App;
+namespace Dating_App.MVVM.Views;
 
 public partial class Profile : ContentPage
 {

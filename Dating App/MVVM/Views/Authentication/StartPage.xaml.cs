@@ -1,7 +1,7 @@
 using System.Security.Cryptography.X509Certificates;
-using Dating_App.Models.Data;
+using Dating_App.MVVM.Models.Data;
 
-namespace Dating_App.Pages.Authentication;
+namespace Dating_App.MVVM.Views.Authentication;
 
 public partial class StartPage : ContentPage
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dating_App.Models.Data
+namespace Dating_App.MVVM.Models.Data
 {
     public static class Constants
     {

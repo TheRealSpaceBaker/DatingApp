@@ -1,13 +1,13 @@
 ﻿using SQLite;
-using Dating_App.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Dating_App.MVVM.Models;
 
-namespace Dating_App.Models.Data
+namespace Dating_App.MVVM.Models.Data
 {
     public class DatingRegistry
     {
@@ -18,14 +18,13 @@ namespace Dating_App.Models.Data
             connection = new SQLiteConnection(
                 Constants.DatabasePath,
                 Constants.flags);
-            connection.CreateTable<Thing>();
             connection.CreateTable<User>();
             connection.CreateTable<Quiz>();
             connection.CreateTable<Question>();
             connection.CreateTable<QuizAnswer>();
             connection.CreateTable<Message>();
             connection.CreateTable<Location>();
-            this.AddOrUpdateUser(new User { Email="ravismeets@gmail.com", Name= "Ravi", Password = "ravi1809", PhoneNumber = 0639833440, Username = "SpaceBaker" });
+            AddOrUpdateUser(new User { Email = "ravismeets@gmail.com", Name = "Ravi", Password = "ravi1809", PhoneNumber = 0639833440, Username = "SpaceBaker" });
         }
 
         public async Task<User> AddOrUpdateUser(User newUser)

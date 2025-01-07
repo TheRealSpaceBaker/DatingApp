@@ -67,28 +67,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\Authentication\LoginPage.xaml">
+	  <MauiXaml Update="MVVM\Views\Authentication\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Authentication\RegisterPage.xaml">
+	  <MauiXaml Update="MVVM\Views\Authentication\RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Authentication\StartPage.xaml">
+	  <MauiXaml Update="MVVM\Views\Authentication\StartPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Messages.xaml">
+	  <MauiXaml Update="MVVM\Views\Messages.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Navigationbar.xaml">
+	  <MauiXaml Update="MVVM\Views\Navigationbar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Profile.xaml">
+	  <MauiXaml Update="MVVM\Views\Profile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Quiz.xaml">
+	  <MauiXaml Update="MVVM\Views\Quiz.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Swipe.xaml">
+	  <MauiXaml Update="MVVM\Views\Swipe.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

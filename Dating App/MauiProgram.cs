@@ -1,4 +1,4 @@
-﻿using Dating_App.Models.Data;
+﻿using Dating_App.MVVM.Models.Data;
 using Microsoft.Extensions.Logging;
 
 namespace Dating_App
