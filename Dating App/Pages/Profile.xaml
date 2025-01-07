@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Dating_App.Profile"
+             Title="Profile">
+    <Grid RowDefinitions="Auto, *">
+        <!-- Header -->
+        <Grid BackgroundColor="#6B5B6B" Row="0" HeightRequest="150" >
+            <Grid.Children>
+                <Label Text="Profile"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   Margin="20,0,0,0"
+                   FontSize="30"
+                   TextColor="White"/>
+            </Grid.Children>
+        </Grid>
+        <Grid Row="1">
+            <StackLayout>
+                <Button
+                    Text="Log Out"
+                    Clicked="OnLogOutClicked"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"/>
+                <Button
+                    Text="Print Info"
+                    Clicked="PrintInfo"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"/>
+                
+            </StackLayout>
+            
+        </Grid>
+        
+    </Grid>
+        
+</ContentPage>

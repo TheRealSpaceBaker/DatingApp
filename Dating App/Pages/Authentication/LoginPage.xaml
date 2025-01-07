@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Dating_App.Pages.Authentication.LoginPage"
+             Title="LoginPage"
+             Shell.TabBarIsVisible="False">
+    <VerticalStackLayout>
+        <Label 
+            Text="Please fill in you info"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label 
+            Text="Email/Username"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Entry
+            Placeholder="Email/Username"
+            x:Name="NameEntry"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            MinimumWidthRequest="200" />
+        <Label 
+            Text="Password"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Entry 
+            Placeholder="PassWord" 
+            IsPassword="True" 
+            x:Name="PasswordEntry"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            MinimumWidthRequest="200"/>
+        <Button
+            Text="Log In"
+            Clicked="OnLoginClicked"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"/>
+    </VerticalStackLayout>
+</ContentPage>
