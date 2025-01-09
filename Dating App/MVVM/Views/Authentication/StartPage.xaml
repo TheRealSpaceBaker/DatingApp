@@ -2,23 +2,31 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Dating_App.MVVM.Views.Authentication.StartPage"
-             Title="StartPage"
-             Shell.TabBarIsVisible="True">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button 
-            Text="Login"
-            Clicked="OnLoginClicked"
-            VerticalOptions="End" 
-            HorizontalOptions="Center" />
-        <Button 
-            Text="Register"
-            Clicked="OnRegisterClicked"
-            VerticalOptions="End" 
-            HorizontalOptions="Center" />
-        
+             Title="Start"
+             Shell.TabBarIsVisible="True"
+             BackgroundColor="#E91E63">
+    <VerticalStackLayout Padding="30" Spacing="25">
+        <Label Text="Welcome"
+           FontSize="24"
+           TextColor="White"
+           HorizontalOptions="Center"
+           VerticalOptions="Start"/>
+        <Frame BackgroundColor="#FFFFFF" Padding="20" CornerRadius="10" VerticalOptions="End">
+            <VerticalStackLayout Spacing="15">
+                <Button 
+                    Text="Login"
+                    Clicked="OnLoginClicked"
+                    BackgroundColor="#6A1B9A"
+                    VerticalOptions="End" 
+                    HorizontalOptions="Fill" />
+                <Button 
+                    Text="Register"
+                    Clicked="OnRegisterClicked"
+                    BackgroundColor="#6A1B9A"
+                    VerticalOptions="End" 
+                    HorizontalOptions="Fill" />
+            </VerticalStackLayout>
+        </Frame>
+
     </VerticalStackLayout>
 </ContentPage>
