@@ -13,6 +13,15 @@
 
         <Frame BackgroundColor="#FFFFFF" Padding="20" CornerRadius="10">
             <VerticalStackLayout Spacing="15">
+                <Label Text="Id"
+                       FontAttributes="Bold"
+                       FontSize="16"
+                       TextColor="#212121"/>
+                <Label Text="{Binding LoggedInUser.Id}"
+                       FontSize="14"
+                       TextColor="#757575"
+                       HorizontalOptions="StartAndExpand"/>
+                
                 <Label Text="Name"
                        FontAttributes="Bold"
                        FontSize="16"

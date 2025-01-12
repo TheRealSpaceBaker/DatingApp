@@ -46,6 +46,7 @@
                             <!-- Name and Message -->
                             <StackLayout Grid.Column="1" Padding="10,0,0,0" VerticalOptions="Center">
                                 <Label Text="{Binding Name}" 
+                                       TextColor="Gray"
                                        FontAttributes="Bold"
                                        FontSize="16"/>
                                 <Label Text="{Binding Message}" 

@@ -18,8 +18,11 @@ namespace Dating_App.MVVM.Models.Data
             connection = new SQLiteAsyncConnection(
                 Constants.DatabasePath,
                 Constants.flags);
-            InitializeDatabase();
-            GenerateData();
+            if (!File.Exists(Constants.DatabasePath))
+            {
+                InitializeDatabase();
+                statusMessage = "Database created";
+            }
         }
 
         public async void InitializeDatabase()
@@ -30,12 +33,16 @@ namespace Dating_App.MVVM.Models.Data
             await connection.CreateTableAsync<QuizAnswer>();
             await connection.CreateTableAsync<Message>();
             await connection.CreateTableAsync<Location>();
+            statusMessage = "Tables Initialized";
+            GenerateData();
         }
         public async void GenerateData()
         {
-            var user1 = AddOrUpdateUser(new User { Email = "ravismeets@gmail.com", CapitalizedEmail = "RAVISMEETS@GMAIL.COM", Name = "Ravi", Password = "123", PhoneNumber = "0639833440", Username = "SpaceBaker", CapitalizedUsername = "SPACEBAKER" });
-            var user2 = AddOrUpdateUser(new User { Email = "egbertbuchem@gmail.com", CapitalizedEmail = "EGBERTBUCHEM@GMAIL.COM", Name = "Egbert", Password = "123", PhoneNumber = "0645678945", Username = "Buchem", CapitalizedUsername = "BUCHEM" });
-            await AddOrUpdateMatch(new Message { MessageContent = "Hello", SenderId = user1.Id, ReceiverId = user2.Id });
+            var user1 = await AddOrUpdateUser(new User { Email = "ravismeets@gmail.com", CapitalizedEmail = "RAVISMEETS@GMAIL.COM", Name = "Ravi", Password = "123", PhoneNumber = "0639833440", Username = "SpaceBaker", CapitalizedUsername = "SPACEBAKER" });
+            var user2 = await AddOrUpdateUser(new User { Email = "egbertbuchem@gmail.com", CapitalizedEmail = "EGBERTBUCHEM@GMAIL.COM", Name = "Egbert", Password = "123", PhoneNumber = "0645678945", Username = "Buchem", CapitalizedUsername = "BUCHEM" });
+            await AddOrUpdateMatch(new Message { IsMatch = true, MatchId = user2.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 17) });
+            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Hello", MatchId = user2.Id, IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 17) });
+            statusMessage = "Data Generated";
         }
 
         public async Task<User> AddOrUpdateUser(User newUser)
@@ -136,6 +143,35 @@ namespace Dating_App.MVVM.Models.Data
                 return null;
             }
         }
-        
+        public async Task<List<Message>> GetMatches(User user)
+        {
+            try
+            {
+                var matches = await connection.Table<Message>().Where(m => m.IsMatch == true).ToListAsync();
+                foreach (var match in matches)
+                {
+                    match.Match = await GetUser(match.MatchId);
+                }
+                return matches;
+            }
+            catch (Exception e)
+            {
+                statusMessage = $"Error: {e.Message}";
+            }
+            return null;
+        }
+        public async Task<List<Message>> GetMessages(User user)
+        {
+            try
+            {
+                return await connection.Table<Message>().Where(m => m.IsMatch == false).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                statusMessage = $"Error: {e.Message}";
+            }
+            return null;
+        }
+
     }
 }
