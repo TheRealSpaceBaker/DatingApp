@@ -50,11 +50,11 @@ public partial class Messages : ContentPage
         }
     }
 
-    private void OnMessageTapped(object sender, TappedEventArgs e)
+    private async void OnMessageTapped(object sender, TappedEventArgs e)
     {
         if (e.Parameter is MessageViewModel matchTapped)
         {
-            Navigation.PushAsync(new MatchChat(matchTapped.Match));
+            await Navigation.PushAsync(new MatchChat(matchTapped.Match));
         }
     }
 }

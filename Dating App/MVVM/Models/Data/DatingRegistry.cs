@@ -174,7 +174,7 @@ namespace Dating_App.MVVM.Models.Data
         {
             try
             {
-                var messages = await connection.Table<Message>().Where(m => m.IsMatch == false && ((m.User1Id == user1.Id && m.User2Id == user2.Id) || (m.User1Id == user2.Id || m.User2Id == user1.Id))).ToListAsync();
+                var messages = await connection.Table<Message>().Where(m => m.IsMatch == false && ((m.User1Id == user1.Id && m.User2Id == user2.Id) || (m.User1Id == user2.Id && m.User2Id == user1.Id))).ToListAsync();
                 foreach (var match in messages)
                 {
                     match.User1 = await GetUser(match.User1Id);

@@ -9,6 +9,9 @@ namespace Dating_App.MVVM.ViewModels
 {
     public class MatchChatViewModel
     {
+        public User Match { get; set; }
         public Message MatchMessage { get; set; }
+        public int Column { get; set; }
+
     }
 }
