@@ -13,9 +13,7 @@ namespace Dating_App.MVVM.ViewModels
         public User Match { get; set; }
         public string? Name { get; set; }
         public string? Message { get; set; }
-        public string? Picture { get; set; }
+        public ImageSource? Picture { get; set; }
 
-
-        
     }
 }

@@ -35,7 +35,16 @@ public partial class Messages : ContentPage
                 otherUser = message.User1;
             }
 
-            var viewModel = new MessageViewModel() { Match = otherUser, Name = otherUser.Name, Picture = "qa.png" };
+            var viewModel = new MessageViewModel() { Match = otherUser, Name = otherUser.Name };
+
+            if (otherUser.ProfilePicture != null)
+            {
+                viewModel.Picture = ImageSource.FromStream(() => new MemoryStream(otherUser.ProfilePicture));
+            }
+            else
+            {
+                viewModel.Picture = ImageSource.FromFile("default_profile.png");
+            }
 
             if (message.MessageContent == null)
             {
