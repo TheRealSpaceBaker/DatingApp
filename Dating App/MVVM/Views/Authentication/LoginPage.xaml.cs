@@ -26,6 +26,11 @@ public partial class LoginPage : ContentPage
             DisplayAlert("Error", "User not found", "OK");
             return;
         }
+        if (loggedInUser.Password != PasswordEntry.Text)
+        {
+            DisplayAlert("Error", "Incorrect password", "OK");
+            return;
+        }
         Session.LoggedInUser = loggedInUser;
         App.Current.MainPage = new NavigationPage(new Navigationbar());
     }
