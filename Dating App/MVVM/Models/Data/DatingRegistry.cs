@@ -11,20 +11,31 @@ namespace Dating_App.MVVM.Models.Data
 {
     public class DatingRegistry
     {
-        SQLiteConnection connection;
+        SQLiteAsyncConnection connection;
         public string? statusMessage { get; set; }
         public DatingRegistry()
         {
-            connection = new SQLiteConnection(
+            connection = new SQLiteAsyncConnection(
                 Constants.DatabasePath,
                 Constants.flags);
-            connection.CreateTable<User>();
-            connection.CreateTable<Quiz>();
-            connection.CreateTable<Question>();
-            connection.CreateTable<QuizAnswer>();
-            connection.CreateTable<Message>();
-            connection.CreateTable<Location>();
-            AddOrUpdateUser(new User { Email = "ravismeets@gmail.com", CapitalizedEmail = "RAVISMEETS@GMAIL.COM", Name = "Ravi", Password = "ravi1809", PhoneNumber = "0639833440", Username = "SpaceBaker", CapitalizedUsername = "SPACEBAKER" });
+            InitializeDatabase();
+            GenerateData();
+        }
+
+        public async void InitializeDatabase()
+        {
+            await connection.CreateTableAsync<User>();
+            await connection.CreateTableAsync<Quiz>();
+            await connection.CreateTableAsync<Question>();
+            await connection.CreateTableAsync<QuizAnswer>();
+            await connection.CreateTableAsync<Message>();
+            await connection.CreateTableAsync<Location>();
+        }
+        public async void GenerateData()
+        {
+            var user1 = AddOrUpdateUser(new User { Email = "ravismeets@gmail.com", CapitalizedEmail = "RAVISMEETS@GMAIL.COM", Name = "Ravi", Password = "123", PhoneNumber = "0639833440", Username = "SpaceBaker", CapitalizedUsername = "SPACEBAKER" });
+            var user2 = AddOrUpdateUser(new User { Email = "egbertbuchem@gmail.com", CapitalizedEmail = "EGBERTBUCHEM@GMAIL.COM", Name = "Egbert", Password = "123", PhoneNumber = "0645678945", Username = "Buchem", CapitalizedUsername = "BUCHEM" });
+            await AddOrUpdateMatch(new Message { MessageContent = "Hello", SenderId = user1.Id, ReceiverId = user2.Id });
         }
 
         public async Task<User> AddOrUpdateUser(User newUser)
@@ -34,13 +45,13 @@ namespace Dating_App.MVVM.Models.Data
             {
                 if (newUser.Id != 0)
                 {
-                    result = connection.Update(newUser);
+                    result = await connection.UpdateAsync(newUser);
                     statusMessage = $"{result} row(s) updated :)";
                     return newUser;
                 }
                 else
                 {
-                    result = connection.Insert(newUser);
+                    result = await connection.InsertAsync(newUser);
                     statusMessage = $"{result} row(s) added :)";
                     return newUser;
                 }
@@ -55,7 +66,7 @@ namespace Dating_App.MVVM.Models.Data
         {
             try
             {
-                return connection.Table<User>().ToList();
+                return await connection.Table<User>().ToListAsync();
             }
             catch (Exception e)
             {
@@ -67,7 +78,7 @@ namespace Dating_App.MVVM.Models.Data
         {
             try
             {
-                return connection.Table<User>().FirstOrDefault(t => t.Id == id);
+                return await connection.Table<User>().FirstOrDefaultAsync(t => t.Id == id);
             }
             catch (Exception e)
             {
@@ -79,7 +90,7 @@ namespace Dating_App.MVVM.Models.Data
         {
             try
             {
-                return connection.Table<User>().FirstOrDefault(u => u.CapitalizedUsername == userNameOrEmail.ToUpper() || u.CapitalizedEmail == userNameOrEmail.ToUpper());
+                return await connection.Table<User>().FirstOrDefaultAsync(u => u.CapitalizedUsername == userNameOrEmail.ToUpper() || u.CapitalizedEmail == userNameOrEmail.ToUpper());
             }
             catch (Exception e)
             {
@@ -92,7 +103,7 @@ namespace Dating_App.MVVM.Models.Data
             try
             {
                 User User = await GetUser(id);
-                connection.Delete(User);
+                await connection.DeleteAsync(User);
                 return true;
             }
             catch (Exception e)
@@ -101,23 +112,22 @@ namespace Dating_App.MVVM.Models.Data
             }
             return false;
         }
-        /*
-        public async Task<Thing> AddOrUpdate(Thing newThing)
+        public async Task<Message> AddOrUpdateMatch(Message newMessage)
         {
             int result = 0;
             try
             {
-                if (newThing.Id != 0)
+                if (newMessage.Id != 0)
                 {
-                    result = connection.Update(newThing);
+                    result = await connection.UpdateAsync(newMessage);
                     statusMessage = $"{result} row(s) updated :)";
-                    return newThing;
+                    return newMessage;
                 }
                 else
                 {
-                    result = connection.Insert(newThing);
+                    result = await connection.InsertAsync(newMessage);
                     statusMessage = $"{result} row(s) added :)";
-                    return newThing;
+                    return newMessage;
                 }
             }
             catch (Exception e)
@@ -126,44 +136,6 @@ namespace Dating_App.MVVM.Models.Data
                 return null;
             }
         }
-        public async Task<List<Thing>> GetAll()
-        {
-            try
-            {
-                return connection.Table<Thing>().ToList();
-            }
-            catch (Exception e)
-            {
-                statusMessage = $"Error: {e.Message}";
-            }
-            return null;
-        }
-        public async Task<Thing> GetById(int id)
-        {
-            try
-            {
-                return connection.Table<Thing>().FirstOrDefault(t => t.Id == id);
-            }
-            catch (Exception e)
-            {
-                statusMessage = $"Error: {e.Message}";
-            }
-            return null;
-        }
-        public async Task<bool> Delete(int id)
-        {
-            try
-            {
-                Thing thing = await GetById(id);
-                connection.Delete(thing);
-                return true;
-            }
-            catch (Exception e)
-            {
-                statusMessage = $"Error: {e.Message}";
-            }
-            return false;
-        }
-        */
+        
     }
 }

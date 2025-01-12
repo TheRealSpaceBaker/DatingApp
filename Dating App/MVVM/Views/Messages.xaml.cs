@@ -23,4 +23,9 @@ public partial class Messages : ContentPage
 
         BindingContext = this;
     }
+
+    private void MessageClicked(object sender, TappedEventArgs e)
+    {
+        Console.WriteLine("Message");
+    }
 }

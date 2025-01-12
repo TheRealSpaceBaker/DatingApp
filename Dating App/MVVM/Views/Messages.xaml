@@ -19,7 +19,10 @@
                             ItemsSource="{Binding MessagesView}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="10" Margin="0,0,0,1" BackgroundColor="White">
+                        <Grid Padding="10" Margin="0,0,0,1" BackgroundColor="White" >
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="MessageClicked" />
+                            </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="70"/>
                                 <ColumnDefinition Width="*"/>

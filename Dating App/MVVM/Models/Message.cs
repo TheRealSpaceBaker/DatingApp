@@ -17,5 +17,6 @@ namespace Dating_App.MVVM.Models
         public int ReceiverId { get; set; }
         [Ignore]
         public User? Receiver { get; set; }
+        public string? MessageContent { get; set; }
     }
 }
