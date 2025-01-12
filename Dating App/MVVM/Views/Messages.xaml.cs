@@ -35,7 +35,7 @@ public partial class Messages : ContentPage
                 otherUser = message.User1;
             }
 
-            var viewModel = new MessageViewModel() { Name = otherUser.Name, Picture = "qa.png" };
+            var viewModel = new MessageViewModel() { Match = otherUser, Name = otherUser.Name, Picture = "qa.png" };
 
             if (message.MessageContent == null)
             {
@@ -50,4 +50,11 @@ public partial class Messages : ContentPage
         }
     }
 
+    private void OnMessageTapped(object sender, TappedEventArgs e)
+    {
+        if (e.Parameter is MessageViewModel matchTapped)
+        {
+            Navigation.PushAsync(new MatchChat(matchTapped.Match));
+        }
+    }
 }

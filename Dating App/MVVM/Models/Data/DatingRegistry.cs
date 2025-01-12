@@ -50,7 +50,7 @@ namespace Dating_App.MVVM.Models.Data
             await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Bericht 1", User1Id = user1.Id, User2Id = user2.Id, User1IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 19) });
             await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Bericht 2", User1Id = user1.Id, User2Id = user2.Id, User1IsSender = false, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 19) });
             await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Bericht 3", User1Id = user1.Id, User2Id = user2.Id, User1IsSender = false, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 19) });
-            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Match Joan", User1Id = user1.Id, User2Id = user2.Id, User1IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15,20) });
+            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Match Joan", User1Id = user1.Id, User2Id = user4.Id, User1IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15,20) });
             statusMessage = "Data Generated";
         }
 
@@ -174,7 +174,7 @@ namespace Dating_App.MVVM.Models.Data
         {
             try
             {
-                var messages = await connection.Table<Message>().Where(m => m.IsMatch == false && ((m.User1Id == user1.Id || m.User2Id == user1.Id) && (m.User2Id == user2.Id || m.User2Id == user2.Id))).ToListAsync();
+                var messages = await connection.Table<Message>().Where(m => m.IsMatch == false && ((m.User1Id == user1.Id && m.User2Id == user2.Id) || (m.User1Id == user2.Id || m.User2Id == user1.Id))).ToListAsync();
                 foreach (var match in messages)
                 {
                     match.User1 = await GetUser(match.User1Id);

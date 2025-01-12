@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Dating_App.MVVM.ViewModels"
              x:Class="Dating_App.MVVM.Views.MatchChat"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              BackgroundColor="#E91E63">
-
+    
     <Grid>
-        <CollectionView ItemsSource="{Binding MatchChatViewModel}">
+        <CollectionView ItemsSource="{Binding MatchChatView}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame
@@ -17,7 +17,7 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center">
                         <Label
-                            Text="{Binding }"
+                            Text="{Binding MatchMessage.MessageContent}"
                             FontSize="16"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
