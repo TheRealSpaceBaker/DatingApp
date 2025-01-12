@@ -11,5 +11,12 @@ namespace Dating_App.MVVM.ViewModels
         public string? Name { get; set; }
         public string? Message { get; set; }
         public string? Picture { get; set; }
+
+
+        public Command<MessageViewModel> MessageTappedCommand => new Command<MessageViewModel>((message) =>
+        {
+            // Print the name of the clicked user to the console
+            Console.WriteLine($"Clicked on user: {message.Name}");
+        });
     }
 }

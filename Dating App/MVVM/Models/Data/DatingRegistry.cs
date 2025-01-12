@@ -40,8 +40,14 @@ namespace Dating_App.MVVM.Models.Data
         {
             var user1 = await AddOrUpdateUser(new User { Email = "ravismeets@gmail.com", CapitalizedEmail = "RAVISMEETS@GMAIL.COM", Name = "Ravi", Password = "123", PhoneNumber = "0639833440", Username = "SpaceBaker", CapitalizedUsername = "SPACEBAKER" });
             var user2 = await AddOrUpdateUser(new User { Email = "egbertbuchem@gmail.com", CapitalizedEmail = "EGBERTBUCHEM@GMAIL.COM", Name = "Egbert", Password = "123", PhoneNumber = "0645678945", Username = "Buchem", CapitalizedUsername = "BUCHEM" });
-            await AddOrUpdateMatch(new Message { IsMatch = true, MatchId = user2.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 17) });
-            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Hello", MatchId = user2.Id, IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 17) });
+            var user3 = await AddOrUpdateUser(new User { Email = "lisavanwersch@gmail.com", CapitalizedEmail = "LISAVANWERSCH@GMAIL.COM", Name = "Lisa", Password = "123", PhoneNumber = "0615988542", Username = "Lisa", CapitalizedUsername = "LISA" });
+            var user4 = await AddOrUpdateUser(new User { Email = "joanmannens@gmail.com", CapitalizedEmail = "JOANMANNENS@GMAIL.COM", Name = "Joan", Password = "123", PhoneNumber = "0625488465", Username = "Joan", CapitalizedUsername = "JOAN" });
+            await AddOrUpdateMatch(new Message { IsMatch = true, MatchId = user2.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 15) });
+            await AddOrUpdateMatch(new Message { IsMatch = true, MatchId = user3.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 16) });
+            await AddOrUpdateMatch(new Message { IsMatch = true, MatchId = user4.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 17) });
+            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Match Edbert", MatchId = user2.Id, IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 18) });
+            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Match Lisa", MatchId = user2.Id, IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 19) });
+            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Match Joan", MatchId = user2.Id, IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15,20) });
             statusMessage = "Data Generated";
         }
 

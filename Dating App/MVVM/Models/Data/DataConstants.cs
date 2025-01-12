@@ -9,7 +9,7 @@ namespace Dating_App.MVVM.Models.Data
 {
     public static class Constants
     {
-        private const string DBFileName = "SQLiteDatingRavi15.db3";
+        private const string DBFileName = "SQLiteDatingRavi16.db3";
 
         public const SQLiteOpenFlags flags =
             SQLiteOpenFlags.ReadWrite |

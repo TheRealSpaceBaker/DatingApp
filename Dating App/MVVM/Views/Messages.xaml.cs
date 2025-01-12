@@ -48,9 +48,4 @@ public partial class Messages : ContentPage
         }
     }
 
-
-    private void MessageClicked(object sender, TappedEventArgs e)
-    {
-        Console.WriteLine("Message");
-    }
 }
