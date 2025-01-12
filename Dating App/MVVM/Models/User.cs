@@ -27,6 +27,7 @@ namespace Dating_App.MVVM.Models
         public string? Password { get; set; }
         [Required, Unique]
         public string? PhoneNumber { get; set; }
+        public byte[] ProfilePicture { get; set; }
         [Ignore]
         public List<Message>? Matches { get; set; }
         [Ignore]
