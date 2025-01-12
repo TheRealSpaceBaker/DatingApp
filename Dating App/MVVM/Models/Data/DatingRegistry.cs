@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Dating_App.MVVM.Models;
+using System.Text.RegularExpressions;
 
 namespace Dating_App.MVVM.Models.Data
 {
@@ -42,12 +43,14 @@ namespace Dating_App.MVVM.Models.Data
             var user2 = await AddOrUpdateUser(new User { Email = "egbertbuchem@gmail.com", CapitalizedEmail = "EGBERTBUCHEM@GMAIL.COM", Name = "Egbert", Password = "123", PhoneNumber = "0645678945", Username = "Buchem", CapitalizedUsername = "BUCHEM" });
             var user3 = await AddOrUpdateUser(new User { Email = "lisavanwersch@gmail.com", CapitalizedEmail = "LISAVANWERSCH@GMAIL.COM", Name = "Lisa", Password = "123", PhoneNumber = "0615988542", Username = "Lisa", CapitalizedUsername = "LISA" });
             var user4 = await AddOrUpdateUser(new User { Email = "joanmannens@gmail.com", CapitalizedEmail = "JOANMANNENS@GMAIL.COM", Name = "Joan", Password = "123", PhoneNumber = "0625488465", Username = "Joan", CapitalizedUsername = "JOAN" });
-            await AddOrUpdateMatch(new Message { IsMatch = true, MatchId = user2.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 15) });
-            await AddOrUpdateMatch(new Message { IsMatch = true, MatchId = user3.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 16) });
-            await AddOrUpdateMatch(new Message { IsMatch = true, MatchId = user4.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 17) });
-            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Match Edbert", MatchId = user2.Id, IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 18) });
-            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Match Lisa", MatchId = user2.Id, IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 19) });
-            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Match Joan", MatchId = user2.Id, IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15,20) });
+            await AddOrUpdateMatch(new Message { IsMatch = true, User1Id = user1.Id, User2Id = user2.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 15) });
+            await AddOrUpdateMatch(new Message { IsMatch = true, User1Id = user1.Id, User2Id = user3.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 16) });
+            await AddOrUpdateMatch(new Message { IsMatch = true, User1Id = user1.Id, User2Id = user4.Id, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 17) });
+            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Match Edbert", User1Id = user1.Id, User2Id = user2.Id, User1IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 18) });
+            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Bericht 1", User1Id = user1.Id, User2Id = user2.Id, User1IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 19) });
+            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Bericht 2", User1Id = user1.Id, User2Id = user2.Id, User1IsSender = false, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 19) });
+            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Bericht 3", User1Id = user1.Id, User2Id = user2.Id, User1IsSender = false, DateTimeSent = new DateTime(2024, 11, 19, 9, 15, 19) });
+            await AddOrUpdateMatch(new Message { IsMatch = false, MessageContent = "Match Joan", User1Id = user1.Id, User2Id = user2.Id, User1IsSender = true, DateTimeSent = new DateTime(2024, 11, 19, 9, 15,20) });
             statusMessage = "Data Generated";
         }
 
@@ -153,10 +156,11 @@ namespace Dating_App.MVVM.Models.Data
         {
             try
             {
-                var matches = await connection.Table<Message>().Where(m => m.IsMatch == true).ToListAsync();
+                var matches = await connection.Table<Message>().Where(m => m.IsMatch == true && (m.User1Id == user.Id || m.User2Id == user.Id)).ToListAsync();
                 foreach (var match in matches)
                 {
-                    match.Match = await GetUser(match.MatchId);
+                    match.User1 = await GetUser(match.User1Id);
+                    match.User2 = await GetUser(match.User2Id);
                 }
                 return matches;
             }
@@ -166,11 +170,17 @@ namespace Dating_App.MVVM.Models.Data
             }
             return null;
         }
-        public async Task<List<Message>> GetMessages(User user)
+        public async Task<List<Message>> GetMessages(User user1, User user2)
         {
             try
             {
-                return await connection.Table<Message>().Where(m => m.IsMatch == false).ToListAsync();
+                var messages = await connection.Table<Message>().Where(m => m.IsMatch == false && ((m.User1Id == user1.Id || m.User2Id == user1.Id) && (m.User2Id == user2.Id || m.User2Id == user2.Id))).ToListAsync();
+                foreach (var match in messages)
+                {
+                    match.User1 = await GetUser(match.User1Id);
+                    match.User2 = await GetUser(match.User2Id);
+                }
+                return messages;
             }
             catch (Exception e)
             {

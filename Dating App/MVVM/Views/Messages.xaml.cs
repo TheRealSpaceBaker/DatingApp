@@ -15,15 +15,6 @@ public partial class Messages : ContentPage
 
         FillViewModel();
 
-        //MessagesView = new ObservableCollection<MessageViewModel>
-        //    {
-        //        new MessageViewModel { Name = "Persoon 1", Message = "Meest Recente Bericht", Picture = "qa.png" },
-        //        new MessageViewModel { Name = "Persoon 2", Message = "Meest Recente Bericht", Picture = "qa.png"  },
-        //        new MessageViewModel { Name = "Persoon 3", Message = "Meest Recente Bericht", Picture = "qa.png"  },
-        //        new MessageViewModel { Name = "Persoon 4", Message = "Meest Recente Bericht", Picture = "qa.png"  },
-        //        new MessageViewModel { Name = "Persoon 5", Message = "Meest Recente Bericht", Picture = "qa.png"  }
-        //    };
-
         BindingContext = this;
     }
 
@@ -33,7 +24,18 @@ public partial class Messages : ContentPage
         var data = await Session.LoggedInUser.GetMatches();
         foreach (var message in data) 
         {
-            var viewModel = new MessageViewModel() { Name = message.Match.Name, Picture = "qa.png" };
+            User otherUser = null;
+
+            if (message.User1Id == Session.LoggedInUser.Id)
+            {
+                otherUser = message.User2;
+            }
+            else
+            {
+                otherUser = message.User1;
+            }
+
+            var viewModel = new MessageViewModel() { Name = otherUser.Name, Picture = "qa.png" };
 
             if (message.MessageContent == null)
             {

@@ -45,5 +45,11 @@ namespace Dating_App.MVVM.Models
             Matches = returned;
             return returned;
         }
+        public async Task<List<Message>> GetMessages(User match)
+        {
+            var db = new DatingRegistry();
+            var returned = await db.GetMessages(this, match);
+            return returned;
+        }
     }
 }
