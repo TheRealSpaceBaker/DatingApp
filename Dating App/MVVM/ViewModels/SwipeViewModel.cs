@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Dating_App;
+using Microsoft.Maui.Graphics;
 
 namespace Dating_App.MVVM.ViewModels
 {
@@ -17,6 +18,9 @@ namespace Dating_App.MVVM.ViewModels
 
         [ObservableProperty]
         private User currentUser;
+
+        [ObservableProperty]
+        private ImageSource currentUserProfilePicture;
 
         [ObservableProperty]
         private bool hasUsers;
@@ -70,12 +74,21 @@ namespace Dating_App.MVVM.ViewModels
             if (_currentIndex < _allUsers?.Count)
             {
                 CurrentUser = _allUsers[_currentIndex];
+                if (CurrentUser?.ProfilePicture != null)
+                {
+                    CurrentUserProfilePicture = ImageSource.FromStream(() => new MemoryStream(CurrentUser.ProfilePicture));
+                }
+                else
+                {
+                    CurrentUserProfilePicture = "default_profile.jpg";
+                }
                 HasUsers = true;
                 HasNoUsers = false;
             }
             else
             {
                 CurrentUser = null;
+                CurrentUserProfilePicture = "default_profile.jpg";
                 HasUsers = false;
                 HasNoUsers = true;
             }

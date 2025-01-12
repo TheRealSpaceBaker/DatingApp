@@ -6,6 +6,9 @@ public partial class Swipe : ContentPage
     public Swipe()
     {
         InitializeComponent();
+
+
+
         BindingContext = new SwipeViewModel();
     }
 }

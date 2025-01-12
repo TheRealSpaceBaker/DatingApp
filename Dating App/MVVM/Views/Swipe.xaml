@@ -4,10 +4,9 @@
              x:Class="Dating_App.MVVM.Views.Swipe">
 
     <VerticalStackLayout Spacing="20" Padding="20">
-        <!-- Profile Display -->
         <Frame Padding="10" BackgroundColor="LightGray" CornerRadius="10" IsVisible="{Binding HasUsers}">
             <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <Image Source="default_profile.jpg" WidthRequest="200" HeightRequest="200" Aspect="AspectFill" />
+                <Image Source="{Binding CurrentUserProfilePicture}" WidthRequest="200" HeightRequest="200" Aspect="AspectFill" />
                 <Label Text="{Binding CurrentUser.Name}" FontSize="24" HorizontalOptions="Center" />
                 <Label Text="{Binding CurrentUser.Email}" FontSize="14" HorizontalOptions="Center" />
             </VerticalStackLayout>
