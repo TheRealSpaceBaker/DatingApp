@@ -1,62 +1,56 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Dating_App.MVVM.ViewModels"
              x:Class="Dating_App.MVVM.Views.Messages"
-             Title="Messages"
-             Shell.TabBarIsVisible="True">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#E91E63">
 
-
-    <Grid RowDefinitions="Auto, *">
-        <!-- Header -->
-        <Grid BackgroundColor="#6B5B6B" Row="0" HeightRequest="150" >
-            <Grid.Children>
-                <Label Text="Messages"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"
-                       Margin="20,0,0,0"
-                       FontSize="30"
-                       TextColor="White"/>
-            </Grid.Children>
-        </Grid>
-
-        <!-- List of Messages -->
+    <Frame BackgroundColor="#FFFFFF" Padding="20" CornerRadius="10" HeightRequest="660">
         <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding MessagesView}">
+                            ItemsSource="{Binding MessagesView}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="10" Margin="0,0,0,5" BackgroundColor="White">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <Frame Padding="10">
+                        <Grid  BackgroundColor="White" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <!-- Profile Image -->
-                        <Frame Grid.Column="0" 
-                               CornerRadius="35"
-                               Padding="0" 
-                               HeightRequest="70" 
-                               WidthRequest="70"
-                               HasShadow="False"
-                               BackgroundColor="Transparent"
-                               VerticalOptions="Center">
-                            <Image Source="{Binding Picture}" 
-                                   Aspect="AspectFill"
-                                   HeightRequest="70"
-                                   WidthRequest="70"/>
-                        </Frame>
+                            <!-- Profile Image -->
+                            <Frame Grid.Column="0" 
+                                       CornerRadius="35"
+                                       Padding="0" 
+                                       HeightRequest="70" 
+                                       WidthRequest="70"
+                                       HasShadow="False"
+                                       BackgroundColor="Transparent"
+                                       VerticalOptions="Center">
+                                <Image Source="{Binding Picture}" 
+                                           Aspect="AspectFill"
+                                           HeightRequest="70"
+                                           WidthRequest="70"/>
+                            </Frame>
 
-                        <!-- Name and Message -->
-                        <StackLayout Grid.Column="1" Padding="10,0,0,0" VerticalOptions="Center">
-                            <Label Text="{Binding Name}" 
-                                   FontAttributes="Bold"
-                                   FontSize="16"/>
-                            <Label Text="{Binding Message}" 
-                                   FontSize="12"
-                                   TextColor="Gray"/>
-                        </StackLayout>
-                    </Grid>
+                            <!-- Name and Message -->
+                            <StackLayout Grid.Column="1" Padding="10,0,0,0" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" 
+                                           TextColor="Black"
+                                           FontAttributes="Bold"
+                                           FontSize="16"/>
+                                <Label Text="{Binding Message}" 
+                                           FontSize="12"
+                                           TextColor="Gray"/>
+                            </StackLayout>
+                        </Grid>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnMessageTapped" CommandParameter="{Binding}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </Grid>
+    </Frame>
 </ContentPage>

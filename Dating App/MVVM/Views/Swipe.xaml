@@ -2,19 +2,27 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Dating_App.MVVM.Views.Swipe"
-             Title="Swipe"
-             Shell.TabBarIsVisible="True">
-    <Grid RowDefinitions="Auto, *">
-        <!-- Header -->
-        <Grid BackgroundColor="#6B5B6B" Row="0" HeightRequest="150" >
-            <Grid.Children>
-                <Label Text="Swipe"
-               VerticalOptions="Center"
-               HorizontalOptions="Start"
-               Margin="20,0,0,0"
-               FontSize="30"
-               TextColor="White"/>
-            </Grid.Children>
-        </Grid>
-    </Grid>
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#E91E63">
+
+    <VerticalStackLayout Spacing="20" Padding="20">
+        <Frame Padding="10" CornerRadius="10" IsVisible="{Binding HasUsers}">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Image Source="{Binding CurrentUserProfilePicture}" WidthRequest="200" HeightRequest="200" Aspect="AspectFill" />
+                <Label Text="{Binding CurrentUser.Name}" FontSize="24" HorizontalOptions="Center" />
+                <Label Text="{Binding CurrentUser.Email}" FontSize="14" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <Frame BackgroundColor="#FFFFFF" Padding="20" CornerRadius="10" IsVisible="{Binding HasNoUsers}">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="No more users to swipe through!" FontSize="40" TextColor="Black" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Frame>
+        
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" IsVisible="{Binding HasUsers}">
+            <Button Text="Dislike" BackgroundColor="Red" TextColor="White" Command="{Binding DislikeCommand}" />
+            <Button Text="Like" BackgroundColor="Green" TextColor="White" Command="{Binding LikeCommand}" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
 </ContentPage>

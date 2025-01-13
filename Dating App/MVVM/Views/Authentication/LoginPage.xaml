@@ -2,38 +2,47 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Dating_App.MVVM.Views.Authentication.LoginPage"
-             Title="LoginPage"
-             Shell.TabBarIsVisible="False">
-    <VerticalStackLayout>
-        <Label 
-            Text="Please fill in you info"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#E91E63">
+    <VerticalStackLayout Padding="30" Spacing="25">
+        <Frame BackgroundColor="#FFFFFF" Padding="20" CornerRadius="10">
+            <VerticalStackLayout Spacing="15">
+                <Label 
+            Text="Please fill in your info"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Label 
+                <Label 
             Text="Email/Username"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Entry
+                <Entry
             Placeholder="Email/Username"
-            x:Name="NameEntry"
+            x:Name="EmailOrUsernameEntry"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             MinimumWidthRequest="200" />
-        <Label 
+                <Label 
             Text="Password"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Entry 
+                <Entry 
             Placeholder="PassWord" 
             IsPassword="True" 
             x:Name="PasswordEntry"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             MinimumWidthRequest="200"/>
-        <Button
+                <Button
             Text="Log In"
             Clicked="OnLoginClicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"/>
+            TextColor="White"
+            BackgroundColor="#6A1B9A"
+            FontAttributes="Bold"
+            FontSize="16"
+            CornerRadius="10"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"/>
+            </VerticalStackLayout>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

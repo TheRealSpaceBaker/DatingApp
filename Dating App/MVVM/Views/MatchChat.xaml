@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Dating_App.MVVM.ViewModels"
+             x:Class="Dating_App.MVVM.Views.MatchChat"
+             NavigationPage.HasNavigationBar="True"
+             BackgroundColor="#E91E63">
+
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- Main Content -->
+            <RowDefinition Height="Auto" />
+            <!-- Bottom Input -->
+        </Grid.RowDefinitions>
+
+        <CollectionView ItemsSource="{Binding MatchChatView}"
+                        VerticalOptions="End">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="50*,50*">
+                        <Frame
+                            Padding="10"
+                            CornerRadius="20"
+                            BackgroundColor="LightGray"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Center"
+                            Grid.Column="{Binding Column}">
+                            <Label
+                                Text="{Binding MatchMessage.MessageContent}"
+                                FontSize="16"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                TextColor="Black" />
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.Row="1" BackgroundColor="Gray" Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Text Input -->
+            <Frame BackgroundColor="White" 
+                   CornerRadius="20" 
+                   VerticalOptions="Center" 
+                   Padding="5" 
+                   BorderColor="Black">
+                <Entry Placeholder="Type Here" 
+                       BackgroundColor="Transparent" 
+                       x:Name="TextBox"/>
+            </Frame>
+
+            <!-- Send Button -->
+            <Frame Grid.Column="1"
+                   BackgroundColor="LightBlue" 
+                   CornerRadius="20" 
+                   HeightRequest="40" 
+                   WidthRequest="40"
+                   VerticalOptions="Center">
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SendTapped"/>
+                </Frame.GestureRecognizers>
+                
+                <Image Source="arrow_icon.png" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+            </Frame>
+        </Grid>
+    </Grid>
+        
+</ContentPage>

@@ -30,9 +30,11 @@ public partial class RegisterPage : ContentPage
             var loggedInUser = await _db.AddOrUpdateUser(new User 
             {
                 Username = UsernameEntry.Text,
+                CapitalizedUsername = UsernameEntry.Text.ToUpper(),
                 Email = EmailEntry.Text,
-                Name = NameEntry.Text, 
-                PhoneNumber = Int32.Parse(PhoneEntry.Text), 
+                CapitalizedEmail = EmailEntry.Text.ToUpper(),
+                Name = NameEntry.Text,
+                PhoneNumber = PhoneEntry.Text,
                 Password = PasswordEntry.Text
             });
             if (loggedInUser != null) 

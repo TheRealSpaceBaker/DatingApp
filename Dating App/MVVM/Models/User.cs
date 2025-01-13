@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Dating_App.MVVM.Models.Data;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,15 +16,20 @@ namespace Dating_App.MVVM.Models
         [Required, Unique]
         public string? Username { get; set; }
         [Required, Unique]
+        public string? CapitalizedUsername { get; set; }
+        [Required, Unique]
         public string? Email { get; set; }
+        [Required, Unique]
+        public string? CapitalizedEmail { get; set; }
         [Required]
         public string? Name { get; set; }
         [Required]
         public string? Password { get; set; }
         [Required, Unique]
-        public int PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
+        public byte[] ProfilePicture { get; set; }
         [Ignore]
-        public List<User>? Matches { get; set; }
+        public List<Message>? Matches { get; set; }
         [Ignore]
         public List<Quiz>? Quizzes { get; set; }
         public float? DistancePreference { get; set; }
@@ -31,5 +37,20 @@ namespace Dating_App.MVVM.Models
         [Ignore]
         public Location? Location { get; set; }
         public float? MatchScore { get; set; }
+
+        public async Task<List<Message>> GetMatches()
+        {
+            var db = new DatingRegistry();
+            var returned = await db.GetMatches(this);
+            Matches = new List<Message>();
+            Matches = returned;
+            return returned;
+        }
+        public async Task<List<Message>> GetMessages(User match)
+        {
+            var db = new DatingRegistry();
+            var returned = await db.GetMessages(this, match);
+            return returned;
+        }
     }
 }
