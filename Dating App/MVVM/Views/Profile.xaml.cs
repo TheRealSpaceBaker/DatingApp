@@ -3,6 +3,8 @@ using Dating_App.MVVM.Models;
 using Dating_App.MVVM.Models.Data;
 using Dating_App.MVVM.ViewModels;
 using SQLite;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 
 namespace Dating_App.MVVM.Views;
 
@@ -11,6 +13,10 @@ public partial class Profile : ContentPage
     private DatingRegistry _db = new DatingRegistry();
     private ProfileViewModel ProfileView = new ProfileViewModel();
     private string _selectedImagePath;
+
+    private readonly string _apiKey = "1HBk9fdF8A6IsHY99cMQ8YcMP2CtXVHCDQnaqCNuSAvMMZpmJMe5JQQJ99BAAC5RqLJXJ3w3AAAFACOGNpXD"; 
+    private readonly string _endpoint = "https://datingappnsfwdetectionapi.cognitiveservices.azure.com/";
+
     public Profile()
     {
         InitializeComponent();
@@ -45,6 +51,12 @@ public partial class Profile : ContentPage
             {
                 _selectedImagePath = result.FullPath;
 
+                if (! await CheckImageForNSFW(_selectedImagePath))
+                {
+                    await DisplayAlert("Warning", "The image contains explicit content", "OK");
+                    return;
+                }
+
                 ProfilePicture.Source = ImageSource.FromFile(_selectedImagePath);
 
                 SaveButton.IsVisible = true;
@@ -63,5 +75,21 @@ public partial class Profile : ContentPage
 
         await _db.AddOrUpdateUser(Session.LoggedInUser);
     }
+    public async Task<bool> CheckImageForNSFW(string imageUrl)
+    {
+        var client = new ComputerVisionClient(new ApiKeyServiceClientCredentials(_apiKey))
+        {
+            Endpoint = _endpoint   
+        };
 
+        List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
+        {
+            VisualFeatureTypes.Adult
+        };
+        using var imageStream = File.OpenRead(imageUrl);
+        ImageAnalysis results = await client.AnalyzeImageInStreamAsync(imageStream, features);
+
+        return !(results.Adult.IsAdultContent || results.Adult.IsRacyContent || results.Adult.IsGoryContent);
+
+    }
 }

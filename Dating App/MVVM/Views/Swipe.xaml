@@ -14,8 +14,8 @@
             </VerticalStackLayout>
         </Frame>
 
-        <Frame BackgroundColor="#FFFFFF" Padding="20" CornerRadius="10">
-            <VerticalStackLayout IsVisible="{Binding HasNoUsers}" HorizontalOptions="Center" VerticalOptions="Center">
+        <Frame BackgroundColor="#FFFFFF" Padding="20" CornerRadius="10" IsVisible="{Binding HasNoUsers}">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <Label Text="No more users to swipe through!" FontSize="40" TextColor="Black" HorizontalOptions="Center" />
             </VerticalStackLayout>
         </Frame>
